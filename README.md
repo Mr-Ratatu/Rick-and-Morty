@@ -9,6 +9,7 @@ Test task. All data is taken from the [Rick and Morty API](https://rickandmortya
 ## Libraries and tools 🛠
 
 * Navigation
+* DataBinding
 * ViewModel
 * LiveData
 * Retrofit
