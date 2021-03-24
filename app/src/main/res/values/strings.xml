@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">RickAndMorti</string>
+    <string name="wifi_off">Нет подключения к интернету</string>
+    <string name="status">Статус:</string>
+    <string name="species">Вид:</string>
+    <string name="type">Тип:</string>
+    <string name="gender">Пол:</string>
+    <string name="date_created">Дата создания:</string>
+    <string name="episode">В каких эпизодах появлялся:</string>
+</resources>
