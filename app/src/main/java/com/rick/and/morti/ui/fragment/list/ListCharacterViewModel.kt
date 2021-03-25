@@ -1,37 +1,29 @@
 package com.rick.and.morti.ui.fragment.list
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.rick.and.morti.common.base.BaseViewModel
-import com.rick.and.morti.common.utils.Resource
-import com.rick.and.morti.data.remote.response.DataResponse
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.rick.and.morti.data.model.CharacterResult
 import com.rick.and.morti.data.repository.ListCharacterRepository
-import com.rick.and.morti.extension.applySchedulers
-import io.reactivex.rxjava3.kotlin.subscribeBy
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
-class ListCharacterViewModel(private val repository: ListCharacterRepository) : BaseViewModel() {
+class ListCharacterViewModel(private val repository: ListCharacterRepository) : ViewModel() {
 
-    private val _listCharacter = MutableLiveData<Resource<DataResponse>>()
-    val listCharacter: LiveData<Resource<DataResponse>> get() = _listCharacter
+    private val _viewState = _FlowViewState()
+    val viewState get() = FlowViewState(_viewState)
 
     init {
-        getListCharacter()
+        initFeed()
     }
 
-    private fun getListCharacter() {
-        repository.getListCharacter()
-            .applySchedulers()
-            .doOnSubscribe { _listCharacter.postValue(Resource.isLoading()) }
-            .subscribeBy(
-                onSuccess = {
-                    _listCharacter.postValue(Resource.isSuccess(it))
-                },
-                onError = {
-                    it.printStackTrace()
-                    _listCharacter.postValue(Resource.isError(it))
-                }
-            )
-            .disposeOnCleared()
+    private fun initFeed() {
+        repository.getListCharacter().cachedIn(viewModelScope).onEach { results ->
+            _viewState._feed.value = results
+        }.launchIn(viewModelScope)
     }
+
 
 }

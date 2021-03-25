@@ -11,8 +11,11 @@ buildscript {
         materialDesignVersion = '1.3.0-alpha03'
         lifeCicleVersion = '2.3.0'
         lifeCicleExtesionVersion = '2.2.0'
+        roomVersion = '2.3.0-alpha02'
+        kotlinCoroutines = '1.3.9'
         koinVersion = '2.1.6'
         rxAndroid = '3.0.0'
+        pagingVersion = '3.0.0-beta01'
         rxKotlin = '3.0.0'
         rxJava = '3.0.9'
     }

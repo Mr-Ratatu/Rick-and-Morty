@@ -61,6 +61,10 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:$rxAndroid"
     implementation "io.reactivex.rxjava3:rxkotlin:$rxKotlin"
 
+    //Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutines"
+
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifeCicleExtesionVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCicleVersion"
@@ -80,4 +84,13 @@ dependencies {
     def glideVersion = '4.12.0'
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //Android Room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+
+    // Paging 3
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+    implementation "androidx.paging:paging-rxjava3:$pagingVersion"
 }

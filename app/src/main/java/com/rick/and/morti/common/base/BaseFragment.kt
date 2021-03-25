@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 
 abstract class BaseFragment<VB : ViewDataBinding> : Fragment() {
 
@@ -22,5 +23,11 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment() {
     }
 
     abstract fun getDataBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+
+    fun launchOnLifecycleScope(execute: suspend () -> Unit) {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            execute()
+        }
+    }
 
 }

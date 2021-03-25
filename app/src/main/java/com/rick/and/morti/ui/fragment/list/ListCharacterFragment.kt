@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.paging.ExperimentalPagingApi
 import com.rick.and.morti.common.base.BaseFragment
 import com.rick.and.morti.common.utils.States
 import com.rick.and.morti.data.model.CharacterResult
@@ -12,6 +14,10 @@ import com.rick.and.morti.databinding.FragmentListCharacterBinding
 import com.rick.and.morti.extension.gone
 import com.rick.and.morti.extension.visible
 import com.rick.and.morti.ui.adapters.CharacterListAdapter
+import com.rick.and.morti.ui.adapters.CharacterListState
+import kotlinx.android.synthetic.main.item_state.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListCharacterFragment : BaseFragment<FragmentListCharacterBinding>(),
@@ -25,43 +31,23 @@ class ListCharacterFragment : BaseFragment<FragmentListCharacterBinding>(),
 
         listAdapter = CharacterListAdapter(this)
 
-        binding.adapter = listAdapter
+        binding.recyclerView.adapter = listAdapter?.withLoadStateHeaderAndFooter(
+            header = CharacterListState { listAdapter?.retry() },
+            footer = CharacterListState { listAdapter?.retry() }
+        )
 
         observeData()
     }
 
     private fun observeData() {
         with(lisViewModel) {
-            listCharacter.observe(viewLifecycleOwner) {
-                setStateView(it.state)
-                it.data?.characterResult?.let { item -> listAdapter?.setData(item) }
-            }
+            viewState.feed.onEach { pagedList ->
+                listAdapter?.submitData(pagedList)
+            }.launchIn(lifecycleScope)
         }
     }
 
-    private fun setStateView(state: States) {
-        with(binding) {
-            when (state) {
-                States.SUCCESS -> {
-                    recyclerView.visible()
-                    loading.gone()
-                    wifiOff.gone()
-                }
-                States.LOADING -> {
-                    recyclerView.gone()
-                    loading.visible()
-                    wifiOff.gone()
-                }
-                States.ERROR -> {
-                    recyclerView.gone()
-                    loading.gone()
-                    wifiOff.visible()
-                }
-            }
-        }
-    }
-
-    override fun onClickCharacter(result: CharacterResult) {
+    override fun onClickCharacter(result: CharacterResult?) {
         view?.findNavController()?.navigate(
             ListCharacterFragmentDirections.actionListCharacterFragmentToDetailCharacterFragment(
                 result

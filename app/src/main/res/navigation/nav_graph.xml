@@ -9,7 +9,7 @@
         android:id="@+id/listCharacterFragment"
         android:name="com.rick.and.morti.ui.fragment.list.ListCharacterFragment"
         android:label="ListCharacterFragment"
-        tools:layout="@layout/fragment_list_character" >
+        tools:layout="@layout/fragment_list_character">
         <action
             android:id="@+id/action_listCharacterFragment_to_detailCharacterFragment"
             app:destination="@id/detailCharacterFragment"
@@ -25,6 +25,7 @@
         tools:layout="@layout/fragment_detail_character">
         <argument
             android:name="result"
-            app:argType="com.rick.and.morti.data.model.CharacterResult" />
+            app:argType="com.rick.and.morti.data.model.CharacterResult"
+            app:nullable="true" />
     </fragment>
 </navigation>

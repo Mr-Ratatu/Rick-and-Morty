@@ -7,4 +7,5 @@
     <string name="gender">Пол:</string>
     <string name="date_created">Дата создания:</string>
     <string name="episode">В каких эпизодах появлялся:</string>
+    <string name="retry">Повторить</string>
 </resources>
