@@ -11,9 +11,12 @@ Test task. All data is taken from the [Rick and Morty API](https://rickandmortya
 ## Libraries and tools 🛠
 
 * Navigation
+* Paging
+* Room
 * DataBinding
 * ViewModel
 * LiveData
+* Flow
 * Retrofit
 * OkHttp
 * Gson
