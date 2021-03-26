@@ -25,5 +25,4 @@ class ListCharacterViewModel(private val repository: ListCharacterRepository) : 
         }.launchIn(viewModelScope)
     }
 
-
 }

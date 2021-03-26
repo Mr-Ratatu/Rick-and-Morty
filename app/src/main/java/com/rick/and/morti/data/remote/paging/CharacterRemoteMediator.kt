@@ -28,7 +28,7 @@ class CharacterRemoteMediator(
     ): MediatorResult {
 
         val loadKey = when (loadType) {
-            LoadType.REFRESH -> null
+            LoadType.REFRESH -> 1
 
             LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
 

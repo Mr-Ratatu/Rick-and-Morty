@@ -17,4 +17,6 @@ val dataBaseModule = module {
 
     single { get<DatabaseManager>().getCharacterDao() }
 
+    single { get<DatabaseManager>().getPageKeyDao() }
+
 }
