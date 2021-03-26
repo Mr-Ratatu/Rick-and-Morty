@@ -21,7 +21,5 @@ Test task. All data is taken from the [Rick and Morty API](https://rickandmortya
 * OkHttp
 * Gson
 * Koin
-* RxAndroid
-* RxKotlin
-* RxJava3
+* Kotlin coroutines
 * Glide
