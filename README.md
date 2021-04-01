@@ -1,4 +1,4 @@
-# RickAndMorti
+# RickAndMorty
 
 Test task. All data is taken from the [Rick and Morty API](https://rickandmortyapi.com/documentation)
 
